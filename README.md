@@ -1,10 +1,13 @@
 # fluent-python
 《精通Python》
-### 英文原版：http://shop.oreilly.com/product/0636920032519.do  
+### 英文原版：
+http://shop.oreilly.com/product/0636920032519.do  
 
-### 原书名：《Fluent Python 副标题 Clear, Concise, and Effective Programming》  
+### 原书名：
+《Fluent Python 副标题 Clear, Concise, and Effective Programming》  
 
->### 特色： Learn how to write idiomatic, effective Python code by leveraging its best features. Python's simplicity quickly lets you become productive with it, but this often means you aren’t using everything the language has to offer. By taking you through Python’s key language features and libraries, this practical book shows you how to make your code shorter, faster, and more readable all at the same time—what experts consider Pythonic.
+### 特色： 
+>Learn how to write idiomatic, effective Python code by leveraging its best features. Python's simplicity quickly lets you become productive with it, but this often means you aren’t using everything the language has to offer. By taking you through Python’s key language features and libraries, this practical book shows you how to make your code shorter, faster, and more readable all at the same time—what experts consider Pythonic.
 
 >Many programmers who learn Python basics fall into the trap of reinventing the wheel because of past experience in other languages, and try to bend the language to patterns that don't really apply to it. Author Luciano Ramalho, a Python Software Foundation member and Python programmer for 15 years, helps you drop your accent from another language so you can code Python fluently.
 
@@ -13,13 +16,17 @@ Rethink some design patterns in a Python context
 Examine attribute descriptors and when to use them: the key to ORMs
 Explore Pythonic objects: protocols versus interfaces, abstract base classes and multiple inheritance
   
-### 作者：Luciano Ramalho  
+### 作者：
+Luciano Ramalho  
 
-### 出版社: O'Reilly Media  
+### 出版社: 
+O'Reilly Media  
 
-## 纸书出版日期：August 2015 (美国东部时间.)  
+## 纸书出版日期：
+August 2015 (美国东部时间.)  
 
-## 全书页数: 750  
+## 全书页数: 
+750  
 
 *************
   
