@@ -31,8 +31,9 @@ August 2015 (美国东部时间.)
 *************
   
 
-`第十二章预览（原文）`  
+`第十二章预览`  
 Chapter 12. Inheritance: for good or for worse  
+
 第十二章 继承该如何是好
 **********************************************
   
@@ -60,7 +61,7 @@ Chapter 12. Inheritance: for good or for worse
 
 例子12-1阐明了此问题。  
 
-*例子12-1。`__setitem__`重写被`dict`的`__init__`和`__update__`方法所忽略。*
+*例子12-1。重写的`__setitem__`被`dict`的`__init__`和`__update__`方法所忽略。*
   
 ************************
   
