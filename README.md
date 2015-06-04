@@ -68,11 +68,14 @@ Chapter 12. Inheritance: for good or for worse
 >>> class DoppelDict(dict):
 ...     def __setitem__(self, key, value):
 ...         super().__setitem__(key, [value] * 2)  # 1...
->>> dd = DoppelDict(one=1)  # 2>>> dd
+>>> dd = DoppelDict(one=1)  # 2
+>>> dd
 {'one': 1}
->>> dd['two'] = 2  # 3>>> dd
+>>> dd['two'] = 2  # 3
+>>> dd
 {'one': 1, 'two': [2, 2]}
->>> dd.update(three=3)  # 4>>> dd
+>>> dd.update(three=3)  # 4>
+>> dd
 {'three': 3, 'one': 1, 'two': [2, 2]}
 ```
   
