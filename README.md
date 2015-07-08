@@ -1,5 +1,5 @@
 # fluent-python
-《精通Python》
+《流畅的Python》
 ### 英文原版：
 http://shop.oreilly.com/product/0636920032519.do  
 
