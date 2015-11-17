@@ -25,10 +25,10 @@ The special method names allow your objects to implement, support and interact w
     string representation and formatting;
     managed contexts (i.e. *with* blocks);
 
-#####MAGIC AND DUNDER
+##### MAGIC AND DUNDER
 The term magic method is slang for special method, but when talking about a specific method like `__getitem__`, some Python developers take the shortcut of saying “under-under-getitem” which is ambiguous, since the syntax __x has another special meaning[4]. But being precise and pronouncing “under-under-getitem-under-under” is tiresome, so I follow the lead of author and teacher Steve Holden and say “dunder-getitem”. All experienced Pythonistas understand that shortcut. As a result, the special methods are also known as dunder methods [5].  
 
-##A Pythonic Card Deck
+## A Pythonic Card Deck
 The following is a very simple example, but it demonstrates the power of implementing just two special methods, `__getitem__` and `__len__`.  
 
 Example 1-1 is a class to represent a deck of playing cards:  
@@ -185,7 +185,7 @@ If you need to invoke a special method, it is usually better to call the related
 
 Avoid creating arbitrary, custom attributes with the `__foo__` syntax because such names may acquire special meanings in the future, even if they are unused today.  
 
-###Emulating numeric types
+### Emulating numeric types
 Several special methods allow user objects to respond to operators such as +. We will cover that in more detail in Chapter 13, but here our goal is to further illustrate the use of special methods through another simple example.
 
 We will implement a class to represent 2-dimensional vectors, i.e. Euclidean vectors like those used in math and physics (see Figure 1-1).  
@@ -194,7 +194,7 @@ We will implement a class to represent 2-dimensional vectors, i.e. Euclidean vec
 
 Figure 1-1. Example of 2D vector addition. Vector(2, 4) + Vector(2, 1) results in Vector(4, 5).  
 
-#####TIP
+##### TIP
 The built-in complex type can be used to represent 2D vectors, but our class can be extended to represent n-dimensional vectors. We will do that in Chapter 14.  
 
 We will start by designing the `API` for such a class by writing a simulated console session which we can use later as doctest. The following snippet tests the vector addition pictured in Figure 1-1:  
@@ -228,6 +228,7 @@ Vector(9, 12)
 Example 1-2 is a `Vector` class implementing the operations just described, through the use of the special methods `__repr__`, `__abs__`, `__add__` and `__mul__`:  
 
 *Example 1-2. A simple 2D vector class.*  
+
 ```python
 from math import hypot
 
@@ -257,7 +258,7 @@ class Vector:
   
 Note that although we implemented four special methods (apart from `__init__`), none of them is directly called within the class or in the typical usage of the class illustrated by the console listings. As mentioned before, the Python interpreter is the only frequent caller of most special methods. In the next sections we discuss the code for each special method.  
 
-###String representation
+### String representation
 The `__repr__` special method is called by the `repr` built-in to get string representation of the object for inspection. If we did not implement `__repr__`, vector instances would be shown in the console like `<Vector object at 0x10e100070>.`  
 
 The interactive console and debugger call `repr` on the results of the expressions evaluated, as does the `'%r'` place holder in classic formatting with `%` operator, and the `!r` conversion field in the new Format String Syntax used in the `str.format` method[7].  
@@ -270,16 +271,16 @@ Contrast `__repr__` with with `__str__`, which is called by the `str()` construc
 
 If you only implement one of these special methods, choose `__repr__`, because when no custom `__str__` is available, Python will call `__repr__` as a fallback.  
 
-#####TIP
+##### TIP
 Difference between `__str__` and `__repr__` in Python is a StackOverflow question with excellent contributions from Pythonistas Alex Martelli and Martijn Pieters.  
 
-###Arithmetic operators
+### Arithmetic operators
 Example 1-2 implements two operators: `+` and `*`, to show basic usage of `__add__` and `__mul__`. Note that in both cases, the methods create and return a new instance of Vector, and do not modify either operand—`self` or `other` are merely read. This is the expected behavior of infix operators: to create new objects and not touch their operands. I will have a lot more to say about that in Chapter 13.  
 
-#####WARNING
+##### WARNING
 As implemented, Example 1-2 allows multiplying a `Vector` by a number, but not a number by a `Vector`, which violates the commutative property of multiplication. We will fix that with the special method `__rmul__` in Chapter 13.  
 
-###Boolean value of a custom type
+### Boolean value of a custom type 自定义类型的布尔值
 Although Python has a `bool` type, it accepts any object in a boolean context, such as the expression controlling an `if` or `while` statement, or as operands to `and,` `or` and `not`. To determine whether a value `x` is `truthy` or `falsy`, Python applies `bool(x)`, which always returns `True` or `False`.  
 
 By default, instances of user-defined classes are considered truthy, unless either `__bool__` or `__len__` is implemented. Basically, `bool(x)` calls`x.__bool__()` and uses the result. If `__bool__` is not implemented, Python tries to invoke `x.__len__()`, and if that returns `zero`, `bool` returns `False`. Otherwise `bool` returns `True`.  
@@ -288,7 +289,7 @@ Our implementation of `__bool__` is conceptually simple: it returns `False` if t
 
 Note how the special method `__bool__` allows your objects to be consistent with the truth value testing rules defined in the Built-in Types chapter of the Python Standard Library documentation.  
 
-#####NOTE
+##### NOTE
 A faster implementation of `Vector.__bool__` is this:  
 
 ```python
@@ -298,12 +299,12 @@ A faster implementation of `Vector.__bool__` is this:
   
 This is harder to read, but avoids the trip through `abs`, `__abs__`, the squares and square root. The explicit conversion to `bool` is needed because `__bool__` must return a boolean and or returns either operand as is: `x` or `y` evaluates to `x` if that is `truthy`, otherwise the result is `y`, whatever that is.  
 
-##Overview of special methods
+## Overview of special methods
 The `Data Model` page of the Python Language Reference lists 83 special method names, 47 of which are used to implement arithmetic, bitwise and comparison operators.  
 
 As an overview of what is available, see Table 1-1 and Table 1-2.  
 
-#####NOTE
+##### NOTE
 The grouping shown in the following tables is not exactly the same as in the official documentation.  
 
 *Table 1-1. Special method names (operators excluded).*  
@@ -311,3 +312,5 @@ The grouping shown in the following tables is not exactly the same as in the off
 |category                   |method names                                  |
 |---------------------------|:---------------------------------------------|
 string/bytes representation |`__repr__`,`__str__`,`__format__`,`__bytes__`
+
+
