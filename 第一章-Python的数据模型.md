@@ -1,4 +1,5 @@
 Chapter 1. The Python Data Model
+第一章－Python数据模型
 ********************************
   
 *Guido’s sense of the aesthetics of language design is amazing. I’ve met many fine language designers who could build theoretically beautiful languages that no one would ever use, but Guido is one of those rare people who can build a language that is just slightly less theoretically beautiful but thereby is a joy to write programs in[3].*
@@ -7,23 +8,42 @@ Chapter 1. The Python Data Model
 
 One of the best qualities of Python is its consistency. After working with Python for a while, you are able to start making informed, correct guesses about features that are new to you.  
 
+Python的一个最佳特性是其一致性。在使用Python一段时间后，你就能够知道并正确地猜测要使用的心功能。  
 
 However, if you learned another object oriented language before Python, you may have found it strange to spell `len(collection)` instead of `collection.len()`. This apparent oddity is the tip of an iceberg which, when properly understood, is the key to everything we call `Pythonic`. The iceberg is called the Python Data Model, and it describes the API that you can use to make your own objects play well with the most idiomatic language features.  
 
+不过，要是你在学些Python之前，学习过其他的面向对象语言，你会奇怪地发现Python使用的是*len(collection)*而不是*collection.len().*这只是明显奇怪的的做法只是冰山一角，当你能够正确理解后，这也是我们称之“Python范儿”的关键。而冰山则称为Python数据模型，它描述了能够让你使用它来构建符合大多数语言特性的个人项目。  
+
 You can think of the Data Model as a description of Python as a framework. It formalizes the interfaces of the building blocks of the language itself, such as sequences, iterators, functions, classes, context managers and so on.  
+
+你可以认为数据模型作为一个使用Python语言描述的框架。它将语言自身所构建的语句块接口正式化了，比如队列，迭代器，函数，类，上下文管理器等等。  
 
 While coding with any framework, you spend a lot of time implementing methods that are called by the framework. The same happens when you leverage the Python Data Model. The Python interpreter invokes special methods to perform basic object operations, often triggered by special syntax. The special method names are always spelled with leading and trailing double underscores, i.e. `__getitem__`. For example, the syntax `obj[key]` is supported by the `__getitem__` special method. To evaluate `my_collection[key]`, the interpreter calls `my_collection.__getitem__(key)`.  
 
+在使用框架编写代码时，实际上你花了很多时间来实现可以被框架调用的方法。同样的事情也发生在你处理Python数据模型时。Python解释器调用会调用特殊方法以执行基本的对象操作，这个操作经常是通过对特殊语法的触发来实现。特殊方法名称常常利用首位的双下划线拼写而成，例如，*__getitem__*。例如，语法*obj[key]*由特殊方法*__getitem__*提供支持。为了计算*my_collection[key]*，解释器需要调用*my_collection.__getitem__(key)*。  
+
 The special method names allow your objects to implement, support and interact with basic language constructs such as:  
 
-    iteration;
-    collections;
-    attribute access;
-    operator overloading;
-    function and method invocation;
-    object creation and destruction;
-    string representation and formatting;
-    managed contexts (i.e. *with* blocks);
+特殊方法名称可以使对象实现并支持与基本语言结构的交互，比如：  
+
+    - iteration;
+    - collections;
+    - attribute access;
+    - operator overloading;
+    - function and method invocation;
+    - object creation and destruction;
+    - string representation and formatting;
+    - managed contexts (i.e. *with* blocks);
+
+- 迭代；
+- 集合；
+- 属性访问；
+- 运算符重载；
+- 函数及方法的调用；
+- 对象创建与销毁；
+- 字符串的重表示与格式化；
+- 管理上下文（例如，with语句块）；
+
 
 ##### MAGIC AND DUNDER
 The term magic method is slang for special method, but when talking about a specific method like `__getitem__`, some Python developers take the shortcut of saying “under-under-getitem” which is ambiguous, since the syntax __x has another special meaning[4]. But being precise and pronouncing “under-under-getitem-under-under” is tiresome, so I follow the lead of author and teacher Steve Holden and say “dunder-getitem”. All experienced Pythonistas understand that shortcut. As a result, the special methods are also known as dunder methods [5].  
@@ -94,9 +114,9 @@ Card(rank='2', suit='clubs')
   
 We’ve just seen two advantages of using special methods to leverage the Python Data Model:  
     
-    1. The users of your classes don’t have to memorize arbitrary method names for standard operations (“How to get the number of items? Is it .size() .length() or what?”)
+1. The users of your classes don’t have to memorize arbitrary method names for standard operations (“How to get the number of items? Is it .size() .length() or what?”)
 
-    2. It’s easier to benefit from the rich Python standard library and avoid reinventing the wheel, like the random.choice function.  
+2. It’s easier to benefit from the rich Python standard library and avoid reinventing the wheel, like the random.choice function.  
 
   
 But it gets better.  
