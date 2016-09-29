@@ -8,7 +8,7 @@ Chapter 1. The Python Data Model
 
 One of the best qualities of Python is its consistency. After working with Python for a while, you are able to start making informed, correct guesses about features that are new to you.  
 
-Python的一个最佳特性是其一致性。在使用Python一段时间后，你就能够知道并正确地猜测要使用的心功能。  
+Python的一个最佳特质就是其具有的一致性。在使用Python一段时间后，你就能够知道并正确地猜测要使用的心功能。  
 
 However, if you learned another object oriented language before Python, you may have found it strange to spell `len(collection)` instead of `collection.len()`. This apparent oddity is the tip of an iceberg which, when properly understood, is the key to everything we call `Pythonic`. The iceberg is called the Python Data Model, and it describes the API that you can use to make your own objects play well with the most idiomatic language features.  
 
@@ -26,14 +26,14 @@ The special method names allow your objects to implement, support and interact w
 
 特殊方法名称可以使对象实现并支持与基本语言结构的交互，比如：  
 
-    - iteration;
-    - collections;
-    - attribute access;
-    - operator overloading;
-    - function and method invocation;
-    - object creation and destruction;
-    - string representation and formatting;
-    - managed contexts (i.e. *with* blocks);
+- iteration;
+- collections;
+- attribute access;
+- operator overloading;
+- function and method invocation;
+- object creation and destruction;
+- string representation and formatting;
+- managed contexts (i.e. *with* blocks);
 
 - 迭代；
 - 集合；
@@ -45,20 +45,28 @@ The special method names allow your objects to implement, support and interact w
 - 管理上下文（例如，with语句块）；
 
 
-##### MAGIC AND DUNDER
+##### MAGIC AND DUNDER 魔法和双下划线
 The term magic method is slang for special method, but when talking about a specific method like `__getitem__`, some Python developers take the shortcut of saying “under-under-getitem” which is ambiguous, since the syntax __x has another special meaning[4]. But being precise and pronouncing “under-under-getitem-under-under” is tiresome, so I follow the lead of author and teacher Steve Holden and say “dunder-getitem”. All experienced Pythonistas understand that shortcut. As a result, the special methods are also known as dunder methods [5].  
 
-## A Pythonic Card Deck
+术语魔法方式是特殊方法的俚语，当我们谈论一个类似`__getitem__`的专有方法时，有时候Python开发者会简称为“under-under-getitem”，这让其他人感到困惑，因为语法__x拥有特别的意义。
+
+## A Pythonic Card Deck Python风格纸牌游戏
 The following is a very simple example, but it demonstrates the power of implementing just two special methods, `__getitem__` and `__len__`.  
+
+下面是一个非常简单的例子，但它足以说明只实现了`__getitem__` 和`__len__`特殊方法的强大之处：  
 
 Example 1-1 is a class to represent a deck of playing cards:  
 
+例子1-1是一个表示一副纸牌游戏的例子：  
+
 *Example 1-1. A deck as a sequence of cards.*  
+例子1-1. 一副按照顺序排列的纸牌。  
 
 ```python
 import collections
 
 Card = collections.namedtuple('Card', ['rank', 'suit'])
+
 
 class FrenchDeck:
     ranks = [str(n) for n in range(2, 11)] + list('JQKA')
@@ -77,6 +85,8 @@ class FrenchDeck:
   
 The first thing to note is the use of collections.namedtuple to construct a simple class to represent individual cards. Since Python 2.6, namedtuple can be used to build classes of objects that are just bundles of attributes with no custom methods, like a database record. In the example we use it to provide a nice representation for the cards in the deck, as shown in the console session:  
 
+要注意的第一件事情是使用collections.namedtuple构建一个简单的类来表示每张牌。从Python2.6起，namedtuple可以向数据库记录一样，只使用一组没有自定义方法的属性来构建对象的类。在这个例子中我们用它来为整副牌提供一个好看的外观，一如控制台会话所示：  
+
 ```python
 >>> beer_card = Card('7', 'diamonds')
 >>> beer_card
@@ -91,7 +101,11 @@ But the point of this example is the `FrenchDeck` class. It’s short, but it pa
 52
 ```
   
+但是这个例子的关键点在于类`FrenchDeck`。这个类的代码略少，但是它直中要害。首先，和任何其他的Python集合一样，deck通过返回纸牌的数量已响应`len()`函数：  
+
 Reading specific cards from the deck, say, the first or the last, should be as easy as `deck[0]` or `deck[-1]`, and this is what the `__getitem__` method provides.  
+
+从整副牌中读取指定的牌，我是说第一张或者最后一张，应该简单的使用`deck[0]` 或者 `deck[-1]`，这也正是`__getitem__`方法所提供的功能。  
 
 ```python
 >>> deck[0]
@@ -153,7 +167,7 @@ Card(rank='Q', suit='hearts')
 ...
 ```
 
-#####ELLIPSIS IN DOCTESTS
+##### ELLIPSIS IN DOCTESTS
 Whenever possible, the Python console listings in this book were extracted from doctests to insure accuracy. When the output was too long, the elided part is marked by an ellipsis ... like in the last line above. In such cases, we used the `#` doctest: +ELLIPSIS directive to make the doctest pass. If you are trying these examples in the interactive console, you may omit the doctest directives altogether.  
 
 Iteration is often implicit. If a collection has no `__contains__` method, the in operator does a sequential scan. Case in point: in works with our FrenchDeck class because it is iterable. Check it out:  
@@ -190,10 +204,10 @@ Card(rank='A', suit='spades')
   
 Although FrenchDeck implicitly inherits from `object`[6], its functionality is not inherited, but comes from leveraging the Data Model and composition. By implementing the special methods `__len__` and `__getitem__` our `FrenchDeck` behaves like a standard Python sequence, allowing it to benefit from core language features—like iteration and slicing—and from the standard library, as shown by the examples using `random.choice`, `reversed` and `sorted`. Thanks to composition, the `__len__` and `__getitem__` implementations can hand off all the work to a `list` object, `self._cards`.  
 
-#####HOW ABOUT SHUFFLING?
+##### HOW ABOUT SHUFFLING?
 As implemented so far, a `FrenchDeck` cannot be shuffled, because it is *immutable*: the cards and their positions cannot be changed, except by violating encapsulation and handling the `_cards` attribute directly. In Chapter 11 that will be fixed by adding a one-line `__setitem__` method.
   
-##How special methods are used
+## How special methods are used
 The first thing to know about special methods is that they are meant to be called by the Python interpreter, and not by you. You don’t write `my_object.__len__()`. You write `len(my_object)` and, if `my_object` is an instance of a user defined class, then Python calls the `__len__` instance method you implemented.  
 
 But for built-in types like `list`, `str`, `bytearray` etc., the interpreter takes a shortcut: the CPython implementation of `len()` actually returns the value of the `ob_size` field in the `PyVarObject C` struct that represents any variable-sized built-in object in memory. This is much faster than calling a method.  
