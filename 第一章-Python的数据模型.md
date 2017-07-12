@@ -8,7 +8,7 @@ Chapter 1. The Python Data Model
 
 One of the best qualities of Python is its consistency. After working with Python for a while, you are able to start making informed, correct guesses about features that are new to you.  
 
-Python的一个最佳特质就是其具有的一致性。在使用Python一段时间后，你就能够知道并正确地猜测要使用的心功能。  
+Python的一个最佳特质就是其具有的一致性。在使用Python一段时间后，你就能够知道并正确地猜测要使用的新功能。  
 
 However, if you learned another object oriented language before Python, you may have found it strange to spell `len(collection)` instead of `collection.len()`. This apparent oddity is the tip of an iceberg which, when properly understood, is the key to everything we call `Pythonic`. The iceberg is called the Python Data Model, and it describes the API that you can use to make your own objects play well with the most idiomatic language features.  
 
